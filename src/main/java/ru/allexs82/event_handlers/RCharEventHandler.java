@@ -13,21 +13,17 @@ import ru.allexs82.enums.Characters;
 import ru.allexs82.enums.Sides;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class RCharEventHandler extends ListenerAdapter {
     private static final Logger LOGGER = LoggerFactory.getLogger(RCharEventHandler.class);
     private static final String SLASH_COMMAND_NAME = "rchar";
-    private static final String REROLL_BUTTON_ID = "rchar-reroll";
+    private static final String REROLL_BUTTON_ID = "rchar_reroll__side=";
     private static final Emoji REROLL_EMOJI = Emoji.fromUnicode("\uD83C\uDDF2\uD83C\uDDF3");
-
-    private final Map<String, Sides> temporalMemorySide = new ConcurrentHashMap<>();
 
     @Override
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
         if (!event.getName().equals(SLASH_COMMAND_NAME) || event.getUser().isBot()) return;
 
-        temporalMemorySide.remove(event.getUser().getId());
         Sides side;
         try {
             side = Sides.valueOf(Objects.requireNonNull(event.getOption("side")).getAsString().toUpperCase());
@@ -37,15 +33,14 @@ public class RCharEventHandler extends ListenerAdapter {
             return;
         }
 
-        temporalMemorySide.put(event.getUser().getId(), side);
         sendCharacterReply(event, side);
     }
 
     @Override
     public void onButtonInteraction(@NotNull ButtonInteractionEvent event) {
-        if (!event.getComponentId().equals(REROLL_BUTTON_ID)) return;
+        if (!event.getComponentId().startsWith(REROLL_BUTTON_ID)) return;
 
-        Sides side = temporalMemorySide.getOrDefault(event.getUser().getId(), Sides.ANY);
+        Sides side = Sides.valueOf(event.getComponentId().substring(REROLL_BUTTON_ID.length()).toUpperCase());
         sendCharacterReply(event, side);
     }
 
@@ -53,7 +48,7 @@ public class RCharEventHandler extends ListenerAdapter {
         Characters selectedCharacter = Characters.getRandomCharacter(side);
 
         event.reply("RNG god thinks that your character is: " + selectedCharacter.getName())
-                .addActionRow(Button.secondary(REROLL_BUTTON_ID, "Reroll").withEmoji(REROLL_EMOJI))
+                .addActionRow(Button.secondary(REROLL_BUTTON_ID + side.name().toLowerCase(), "Reroll").withEmoji(REROLL_EMOJI))
                 .queue();
         LOGGER.info("User {} got character: {}", Utils.getUserIdAndName(event), selectedCharacter.getName());
     }
@@ -62,7 +57,7 @@ public class RCharEventHandler extends ListenerAdapter {
         Characters selectedCharacter = Characters.getRandomCharacter(side);
 
         event.reply("RNG god thinks that your character is: " + selectedCharacter.getName())
-                .addActionRow(Button.secondary(REROLL_BUTTON_ID, "Reroll").withEmoji(REROLL_EMOJI))
+                .addActionRow(Button.secondary(REROLL_BUTTON_ID + side.name().toLowerCase(), "Reroll").withEmoji(REROLL_EMOJI))
                 .queue();
         LOGGER.info("User {} got character: {}. (handleButtonInteraction)", Utils.getUserIdAndName(event), selectedCharacter.getName());
     }
