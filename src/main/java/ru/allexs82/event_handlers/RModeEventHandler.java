@@ -58,7 +58,7 @@ public class RModeEventHandler extends ListenerAdapter {
                 .map(Modes::valueOf)
                 .collect(Collectors.toCollection(ArrayList::new));
 
-        int selectedModesMask = Utils.encodeSelectedModes(selectedModes);
+        int selectedModesMask = Utils.encodeEnums(selectedModes);
         sendResponse(event, selectedModesMask, 0);
     }
 
@@ -72,9 +72,9 @@ public class RModeEventHandler extends ListenerAdapter {
         sendResponse(event, selectedModesMask, excludedMapsMask);
     }
 
-    private void sendResponse(@NotNull GenericComponentInteractionCreateEvent event, int selectedModeMask, int excludedMapsMask) {
-        List<Modes> selectedModes = Utils.decodeSelectedModes(selectedModeMask);
-        List<Maps> excludedMaps = Utils.decodeExcludedMaps(excludedMapsMask);
+    private void sendResponse(@NotNull GenericComponentInteractionCreateEvent event, int selectedModesMask, int excludedMapsMask) {
+        List<Modes> selectedModes = Utils.decodeEnums(selectedModesMask, Modes.class);
+        List<Maps> excludedMaps = Utils.decodeEnums(excludedMapsMask, Maps.class);
 
         Maps randomMap;
         try {
@@ -89,9 +89,9 @@ public class RModeEventHandler extends ListenerAdapter {
         Collections.shuffle(selectedModes, random);
         Modes randomMode = selectedModes.get(random.nextInt(selectedModes.size()));
 
-        String reRollButtonId = REROLL_BUTTON_ID + SELECTED_MODES_MASK_PREFIX + Utils.encodeSelectedModes(selectedModes) + EXCLUDED_MAPS_MASK_PREFIX + excludedMapsMask;
+        String reRollButtonId = REROLL_BUTTON_ID + SELECTED_MODES_MASK_PREFIX + selectedModesMask + EXCLUDED_MAPS_MASK_PREFIX + excludedMapsMask;
         excludedMaps.add(randomMap);
-        String reRollAndExcludeButtonId = REROLL_BUTTON_ID + SELECTED_MODES_MASK_PREFIX + Utils.encodeSelectedModes(selectedModes) + EXCLUDED_MAPS_MASK_PREFIX + Utils.encodeExcludedMaps(excludedMaps);
+        String reRollAndExcludeButtonId = REROLL_BUTTON_ID + SELECTED_MODES_MASK_PREFIX + selectedModesMask + EXCLUDED_MAPS_MASK_PREFIX + Utils.encodeEnums(excludedMaps);
 
         event.reply("RNG god says play " + randomMode.getName() + " on " + randomMap.getName() + "!")
                 .addActionRow(

@@ -1,6 +1,5 @@
 package ru.allexs82;
 
-import ru.allexs82.enums.Maps;
 import ru.allexs82.enums.Modes;
 import net.dv8tion.jda.api.events.interaction.GenericInteractionCreateEvent;
 import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu;
@@ -22,7 +21,6 @@ public abstract class Utils {
      */
     @NotNull
     public static String getUserIdAndName(@NotNull GenericInteractionCreateEvent event) {
-        event.getUser();
         return event.getUser().getId() + " (" + event.getUser().getName() + ")";
     }
 
@@ -42,68 +40,36 @@ public abstract class Utils {
     }
 
     /**
-     * Encodes a list of excluded maps into a bitwise mask.
+     * Encodes a list of enums into a bitwise mask.
      *
-     * @param excludedMaps the list of maps to be excluded
-     * @return a bitwise mask representing the excluded maps
+     * @param <E>   the enum type
+     * @param enums the list of enums to encode
+     * @return a bitwise mask representing the enums
      */
-    public static int encodeExcludedMaps(@NotNull List<Maps> excludedMaps) {
+    public static <E extends Enum<E>> int encodeEnums(@NotNull List<E> enums) {
         int mask = 0;
-        for (Maps map : Maps.values()) {
-            if (excludedMaps.contains(map)) {
-                mask |= 1 << map.ordinal();
-            }
+        for (E e : enums) {
+            mask |= 1 << e.ordinal();
         }
         return mask;
     }
 
     /**
-     * Decodes a bitwise mask to retrieve the list of excluded maps.
+     * Decodes a bitwise mask to retrieve the list of enums.
      *
-     * @param mask the bitwise mask representing the excluded maps
-     * @return a list of maps that are excluded
+     * @param mask      the bitwise mask representing the enums
+     * @param enumClass the enum class
+     * @param <E>       the enum type
+     * @return a list of enums that are represented by the mask
      */
     @NotNull
-    public static List<Maps> decodeExcludedMaps(int mask) {
-        List<Maps> excludedMaps = new ArrayList<>();
-        for (Maps map : Maps.values()) {
-            if ((mask & (1 << map.ordinal())) != 0) {
-                excludedMaps.add(map);
+    public static <E extends Enum<E>> List<E> decodeEnums(int mask, @NotNull Class<E> enumClass) {
+        List<E> enums = new ArrayList<>();
+        for (E e : enumClass.getEnumConstants()) {
+            if ((mask & (1 << e.ordinal())) != 0) {
+                enums.add(e);
             }
         }
-        return excludedMaps;
-    }
-
-    /**
-     * Encodes a list of selected modes into a bitwise mask.
-     *
-     * @param selectedModes the list of selected modes
-     * @return a bitwise mask representing the selected modes
-     */
-    public static int encodeSelectedModes(@NotNull List<Modes> selectedModes) {
-        int mask = 0;
-        for (Modes mode : Modes.values()) {
-            if (selectedModes.contains(mode)) {
-                mask |= 1 << mode.ordinal();
-            }
-        }
-        return mask;
-    }
-
-    /**
-     * Decodes a bitwise mask to retrieve the list of excluded maps.
-     *
-     * @param mask the bitwise mask representing the selected modes
-     * @return a list of selected modes.
-     */
-    @NotNull
-    public static List<Modes> decodeSelectedModes(int mask) {
-        List<Modes> selectedModes = new ArrayList<>();
-        for (Modes mode : Modes.values()) {
-            if ((mask & (1 << mode.ordinal())) != 0) {
-                selectedModes.add(mode);
-            }
-        }
-        return selectedModes;
+        return enums;
     }
 }

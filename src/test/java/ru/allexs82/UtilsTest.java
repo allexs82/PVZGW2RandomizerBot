@@ -19,8 +19,8 @@ public class UtilsTest {
             }
         }
 
-        int mask = Utils.encodeExcludedMaps(maps);
-        List<Maps> decodedMaps = Utils.decodeExcludedMaps(mask);
+        int mask = Utils.encodeEnums(maps);
+        List<Maps> decodedMaps = Utils.decodeEnums(mask, Maps.class);
 
         Assertions.assertIterableEquals(maps, decodedMaps);
     }
@@ -34,8 +34,8 @@ public class UtilsTest {
             }
         }
 
-        int mask = Utils.encodeSelectedModes(modes);
-        List<Modes> decodedModes = Utils.decodeSelectedModes(mask);
+        int mask = Utils.encodeEnums(modes);
+        List<Modes> decodedModes = Utils.decodeEnums(mask, Modes.class);
 
         Assertions.assertIterableEquals(modes, decodedModes);
     }

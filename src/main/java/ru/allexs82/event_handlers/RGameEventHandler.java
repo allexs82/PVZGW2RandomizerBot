@@ -233,28 +233,28 @@ public class RGameEventHandler extends ListenerAdapter {
         @NotNull
         @Contract(value = " -> new", pure = true)
         public List<Modes> getSelectedModes() {
-            return Utils.decodeSelectedModes(selectedModesMask);
+            return Utils.decodeEnums(selectedModesMask, Modes.class);
         }
 
         @NotNull
         @Contract(value = " -> new", pure = true)
         public List<Maps> getExcludedMaps() {
-            return Utils.decodeExcludedMaps(excludedMapsMask);
+            return Utils.decodeEnums(excludedMapsMask, Maps.class);
         }
 
         public void addSelectedModes(@NotNull List<Modes> modes) {
-            List<Modes> selectedModes = Utils.decodeSelectedModes(selectedModesMask);
+            List<Modes> selectedModes = Utils.decodeEnums(selectedModesMask, Modes.class);
             selectedModes.addAll(modes);
-            selectedModesMask = Utils.encodeSelectedModes(selectedModes);
+            selectedModesMask = Utils.encodeEnums(selectedModes);
         }
 
         public void excludeAndInvalidateLastMap() {
-            List<Maps> excludedMaps = Utils.decodeExcludedMaps(excludedMapsMask);
+            List<Maps> excludedMaps = Utils.decodeEnums(excludedMapsMask, Maps.class);
             if (lastMap != null && !excludedMaps.contains(lastMap)) {
                 excludedMaps.add(lastMap);
                 lastMap = null;
             }
-            excludedMapsMask = Utils.encodeExcludedMaps(excludedMaps);
+            excludedMapsMask = Utils.encodeEnums(excludedMaps);
         }
 
         public void setLastMap(Maps lastMap) {
