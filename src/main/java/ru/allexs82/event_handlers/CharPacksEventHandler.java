@@ -29,6 +29,7 @@ public class CharPacksEventHandler extends ListenerAdapter {
     @Override
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
         if (!event.getName().equals("char_packs")) return;
+        event.deferReply().queue();
 
         int count = DEFAULT_PACK_COUNT;
         try {
@@ -46,25 +47,26 @@ public class CharPacksEventHandler extends ListenerAdapter {
         }
 
         LOGGER.info("char_packs slash command from user {} handled successfully", Utils.getUserIdAndName(event));
-        event.reply("Select the pack").addEmbeds(embeds).addActionRow(actionRow).queue();
+        event.getHook().editOriginal("Select the pack").setEmbeds(embeds).setActionRow(actionRow).queue();
     }
 
     @Override
     public void onButtonInteraction(@NotNull ButtonInteractionEvent event) {
         if (!event.getComponentId().startsWith(BUTTON_PREFIX)) return;
+        event.deferReply().queue();
 
         CharPacks selectedPack;
         try {
             selectedPack = CharPacks.valueOf(event.getComponentId().substring(BUTTON_PREFIX.length()).toUpperCase());
         } catch (IllegalArgumentException e) {
-            LOGGER.error("Invalid pack selected by user {}: {}", Utils.getUserIdAndName(event), event.getComponentId().substring(16));
+            LOGGER.error("Invalid pack selected by user {}: {}", Utils.getUserIdAndName(event), event.getComponentId().substring(BUTTON_PREFIX.length()));
             event.reply("Invalid pack selection. Please try again.").setEphemeral(true).queue();
             return;
         }
 
         Characters character = selectedPack.getCharacters().get(random.nextInt(selectedPack.getCharacters().size()));
 
-        event.reply(event.getUser().getAsMention() + " your character is " + character.getName()).queue();
+        event.getHook().editOriginal(event.getUser().getAsMention() + " your character is " + character.getName()).queue();
         LOGGER.info("Button interaction {} from user {} handled successfully. Character: {}", event.getComponentId(), Utils.getUserIdAndName(event), character.getName());
     }
 

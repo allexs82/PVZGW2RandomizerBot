@@ -37,6 +37,8 @@ public class RGameEventHandler extends ListenerAdapter {
     @Override
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
         if (!event.getName().equals(SLASH_COMMAND_NAME)) return;
+        event.deferReply().queue();
+
         sessionsHashMap.remove(event.getUser().getId());
         List<User> players = getPlayersFromEvent(event);
 
@@ -45,14 +47,19 @@ public class RGameEventHandler extends ListenerAdapter {
 
         StringSelectMenu stringSelectMenu = Utils.createModesSelectMenu(getMenuId());
 
-        event.reply("Select mode(s)").addActionRow(stringSelectMenu).setEphemeral(true).submit()
-                .whenComplete((v, error) -> {
-                    if (error != null) {
-                        LOGGER.error("Error while handling slash command {} from user {}.", event.getName(), Utils.getUserIdAndName(event), error);
-                    } else {
-                        LOGGER.info("Handled slash command {} from user {}.", event.getName(), Utils.getUserIdAndName(event));
-                    }
-                });
+        event.getHook().deleteOriginal().submit()
+                .thenCompose(
+                        (v) -> event.getHook().sendMessage("Select mode(s)")
+                                .setActionRow(stringSelectMenu)
+                                .setEphemeral(true)
+                                .submit()
+                ).whenComplete((v, error) -> {
+            if (error != null) {
+                LOGGER.error("Error while handling slash command {} from user {}.", event.getName(), Utils.getUserIdAndName(event), error);
+            } else {
+                LOGGER.info("Handled slash command {} from user {}.", event.getName(), Utils.getUserIdAndName(event));
+            }
+        });
     }
 
     private List<User> getPlayersFromEvent(SlashCommandInteractionEvent event) {
@@ -69,10 +76,12 @@ public class RGameEventHandler extends ListenerAdapter {
     @Override
     public void onStringSelectInteraction(@NotNull StringSelectInteractionEvent event) {
         if (!event.getComponentId().equals(getMenuId())) return;
+        event.deferReply().queue();
+
         String userId = event.getUser().getId();
         Session session = sessionsHashMap.get(userId);
         if (session == null) {
-            event.reply("Oops... Couldn't find your session :confused:. Make sure it was you who sent /rgame.").submit()
+            event.getHook().editOriginal("Oops... Couldn't find your session :confused:. Make sure it was you who sent /rgame.").submit()
                     .whenComplete((v, error) -> LOGGER.error("Can't find session for user {}", Utils.getUserIdAndName(event)));
             return;
         }
@@ -87,6 +96,7 @@ public class RGameEventHandler extends ListenerAdapter {
     public void onButtonInteraction(@NotNull ButtonInteractionEvent event) {
         String componentId = event.getComponentId();
         if (!componentId.equals(REROLL) && !componentId.equals(REROLL_EXCLUDE)) return;
+        event.deferReply().queue();
         if (componentId.equals(REROLL_EXCLUDE)) {
             sessionsHashMap.get(event.getUser().getId()).excludeAndInvalidateLastMap();
         }
@@ -97,7 +107,9 @@ public class RGameEventHandler extends ListenerAdapter {
         String userId = event.getUser().getId();
         Session session = sessionsHashMap.get(userId);
         if (session == null) {
-            event.reply("Session not found. Please type /rgame again.").queue();
+            event.getHook().deleteOriginal().submit().thenCompose(
+                    (v) -> event.getHook().editOriginal("Session not found. Please type /rgame again.").submit()
+            );
             LOGGER.error("No session found for user {}", Utils.getUserIdAndName(event));
             return;
         }
@@ -112,7 +124,10 @@ public class RGameEventHandler extends ListenerAdapter {
         try {
             randomMap = Maps.getRandomMapForModes(selectedModes, excludedMaps);
         } catch (MapsException e) {
-            event.reply("Looks like you are excluded all maps. Please type /rgame again.").setEphemeral(true).queue();
+            event.getHook().deleteOriginal().submit().thenCompose(
+                    (v) -> event.getHook().sendMessage("Looks like you are excluded all maps. Please type /rgame again.").setEphemeral(true).submit()
+            );
+
             LOGGER.info("User {} excluded all maps.", Utils.getUserIdAndName(event));
             return;
         }
@@ -134,8 +149,8 @@ public class RGameEventHandler extends ListenerAdapter {
         embedBuilder.setColor(0xFF548AF7);
         embedBuilder.setDescription(getDescription(randomCharacters));
 
-        event.reply("").addEmbeds(embedBuilder.build())
-                .addActionRow(
+        event.getHook().editOriginal("").setEmbeds(embedBuilder.build())
+                .setActionRow(
                         Button.secondary(REROLL, "Reroll").withEmoji(Emoji.fromUnicode("\uD83C\uDDF2\uD83C\uDDF3")),
                         Button.secondary(REROLL_EXCLUDE, "Exclude map and reroll").withEmoji(Emoji.fromUnicode("\uD83D\uDC80")))
                 .submit()

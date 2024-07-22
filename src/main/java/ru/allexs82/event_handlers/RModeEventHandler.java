@@ -40,20 +40,25 @@ public class RModeEventHandler extends ListenerAdapter {
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
         if (!event.getName().equals(SLASH_COMMAND_NAME)) return;
 
+        event.deferReply().queue();
+
         StringSelectMenu selectMenu = Utils.createModesSelectMenu(MENU_ID);
-        event.reply("Select a mode(s):").addActionRow(selectMenu).setEphemeral(true).submit()
-                .whenComplete((v, error) -> {
-                    if (error != null) {
-                        LOGGER.error("Error while handling slash command {} from user {}.", event.getName(), Utils.getUserIdAndName(event), error);
-                    } else {
-                        LOGGER.info("Handled slash command {} from user {}.", event.getName(), Utils.getUserIdAndName(event));
-                    }
-                });
+        event.getHook().deleteOriginal().submit().thenCompose(
+                (v) ->  event.getHook().sendMessage("Select a mode(s):").addActionRow(selectMenu).setEphemeral(true).submit()
+                        .whenComplete((m, error) -> {
+                            if (error != null) {
+                                LOGGER.error("Error while handling slash command {} from user {}.", event.getName(), Utils.getUserIdAndName(event), error);
+                            } else {
+                                LOGGER.info("Handled slash command {} from user {}.", event.getName(), Utils.getUserIdAndName(event));
+                            }
+                        })
+        );
     }
 
     @Override
     public void onStringSelectInteraction(@NotNull StringSelectInteractionEvent event) {
         if (!event.getComponentId().equals(MENU_ID)) return;
+        event.deferReply().queue();
         List<Modes> selectedModes = event.getValues().stream()
                 .map(Modes::valueOf)
                 .collect(Collectors.toCollection(ArrayList::new));
@@ -66,6 +71,8 @@ public class RModeEventHandler extends ListenerAdapter {
     public void onButtonInteraction(@NotNull ButtonInteractionEvent event) {
         String componentId = event.getComponentId();
         if (!componentId.startsWith(REROLL_BUTTON_ID)) return;
+
+        event.deferReply().queue();
 
         int excludedMapsMask = getMaskFromButtonId(event.getComponentId(), EXCLUDED_MAPS_MASK_REGEX);
         int selectedModesMask = getMaskFromButtonId(event.getComponentId(), SELECTED_MODES_MASK_REGEX);
@@ -80,7 +87,8 @@ public class RModeEventHandler extends ListenerAdapter {
         try {
             randomMap = Maps.getRandomMapForModes(selectedModes, excludedMaps);
         } catch (MapsException e) {
-            event.reply("Looks like you are excluded all maps. Please type /rmode again.").setEphemeral(true).queue();
+            event.getHook().deleteOriginal().submit().thenCompose(
+                    v -> event.getHook().sendMessage("Looks like you are excluded all maps. Please type /rmode again.").setEphemeral(true).submit());
             LOGGER.info("User {} excluded all maps.", Utils.getUserIdAndName(event));
             return;
         }
@@ -93,8 +101,8 @@ public class RModeEventHandler extends ListenerAdapter {
         excludedMaps.add(randomMap);
         String reRollAndExcludeButtonId = REROLL_BUTTON_ID + SELECTED_MODES_MASK_PREFIX + selectedModesMask + EXCLUDED_MAPS_MASK_PREFIX + Utils.encodeEnums(excludedMaps);
 
-        event.reply("RNG god says play " + randomMode.getName() + " on " + randomMap.getName() + "!")
-                .addActionRow(
+        event.getHook().editOriginal("RNG god says play " + randomMode.getName() + " on " + randomMap.getName() + "!")
+                .setActionRow(
                         Button.secondary(reRollButtonId, "Reroll").withEmoji(REROLL_EMOJI),
                         Button.secondary(reRollAndExcludeButtonId, "Exclude map and reroll").withEmoji(EXCLUDE_EMOJI))
                 .submit()

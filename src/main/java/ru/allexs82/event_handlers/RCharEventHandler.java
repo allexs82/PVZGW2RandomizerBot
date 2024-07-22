@@ -23,6 +23,7 @@ public class RCharEventHandler extends ListenerAdapter {
     @Override
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
         if (!event.getName().equals(SLASH_COMMAND_NAME) || event.getUser().isBot()) return;
+        event.deferReply().queue();
 
         Sides side;
         try {
@@ -39,6 +40,7 @@ public class RCharEventHandler extends ListenerAdapter {
     @Override
     public void onButtonInteraction(@NotNull ButtonInteractionEvent event) {
         if (!event.getComponentId().startsWith(REROLL_BUTTON_ID)) return;
+        event.deferReply().queue();
 
         Sides side = Sides.valueOf(event.getComponentId().substring(REROLL_BUTTON_ID.length()).toUpperCase());
         sendCharacterReply(event, side);
@@ -47,8 +49,8 @@ public class RCharEventHandler extends ListenerAdapter {
     private void sendCharacterReply(@NotNull SlashCommandInteractionEvent event, Sides side) {
         Characters selectedCharacter = Characters.getRandomCharacter(side);
 
-        event.reply("RNG god thinks that your character is: " + selectedCharacter.getName())
-                .addActionRow(Button.secondary(REROLL_BUTTON_ID + side.name().toLowerCase(), "Reroll").withEmoji(REROLL_EMOJI))
+        event.getHook().editOriginal("RNG god thinks that your character is: " + selectedCharacter.getName())
+                .setActionRow(Button.secondary(REROLL_BUTTON_ID + side.name().toLowerCase(), "Reroll").withEmoji(REROLL_EMOJI))
                 .queue();
         LOGGER.info("User {} got character: {}", Utils.getUserIdAndName(event), selectedCharacter.getName());
     }
@@ -56,8 +58,8 @@ public class RCharEventHandler extends ListenerAdapter {
     private void sendCharacterReply(@NotNull ButtonInteractionEvent event, Sides side) {
         Characters selectedCharacter = Characters.getRandomCharacter(side);
 
-        event.reply("RNG god thinks that your character is: " + selectedCharacter.getName())
-                .addActionRow(Button.secondary(REROLL_BUTTON_ID + side.name().toLowerCase(), "Reroll").withEmoji(REROLL_EMOJI))
+        event.getHook().editOriginal("RNG god thinks that your character is: " + selectedCharacter.getName())
+                .setActionRow(Button.secondary(REROLL_BUTTON_ID + side.name().toLowerCase(), "Reroll").withEmoji(REROLL_EMOJI))
                 .queue();
         LOGGER.info("User {} got character: {}. (handleButtonInteraction)", Utils.getUserIdAndName(event), selectedCharacter.getName());
     }
