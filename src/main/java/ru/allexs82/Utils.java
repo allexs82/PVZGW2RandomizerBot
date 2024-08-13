@@ -1,6 +1,6 @@
 package ru.allexs82;
 
-import ru.allexs82.enums.Modes;
+import ru.allexs82.enums.ModesOld;
 import net.dv8tion.jda.api.events.interaction.GenericInteractionCreateEvent;
 import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu;
 import org.jetbrains.annotations.NotNull;
@@ -33,10 +33,10 @@ public abstract class Utils {
     @NotNull
     public static StringSelectMenu createModesSelectMenu(@NotNull String id) {
         StringSelectMenu.Builder menuBuilder = StringSelectMenu.create(id);
-        for (Modes mode : Modes.values()) {
+        for (ModesOld mode : ModesOld.values()) {
             menuBuilder.addOption(mode.getName(), mode.name());
         }
-        return menuBuilder.setMinValues(1).setMaxValues(Modes.values().length).build();
+        return menuBuilder.setMinValues(1).setMaxValues(ModesOld.values().length).build();
     }
 
     /**

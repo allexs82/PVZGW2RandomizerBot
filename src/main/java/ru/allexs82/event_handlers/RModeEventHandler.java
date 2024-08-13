@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.allexs82.Utils;
 import ru.allexs82.enums.Maps;
-import ru.allexs82.enums.Modes;
+import ru.allexs82.enums.ModesOld;
 import ru.allexs82.exceptions.MapsException;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -59,8 +59,8 @@ public class RModeEventHandler extends ListenerAdapter {
     public void onStringSelectInteraction(@NotNull StringSelectInteractionEvent event) {
         if (!event.getComponentId().equals(MENU_ID)) return;
         event.deferReply().queue();
-        List<Modes> selectedModes = event.getValues().stream()
-                .map(Modes::valueOf)
+        List<ModesOld> selectedModes = event.getValues().stream()
+                .map(ModesOld::valueOf)
                 .collect(Collectors.toCollection(ArrayList::new));
 
         int selectedModesMask = Utils.encodeEnums(selectedModes);
@@ -80,7 +80,7 @@ public class RModeEventHandler extends ListenerAdapter {
     }
 
     private void sendResponse(@NotNull GenericComponentInteractionCreateEvent event, int selectedModesMask, int excludedMapsMask) {
-        List<Modes> selectedModes = Utils.decodeEnums(selectedModesMask, Modes.class);
+        List<ModesOld> selectedModes = Utils.decodeEnums(selectedModesMask, ModesOld.class);
         List<Maps> excludedMaps = Utils.decodeEnums(excludedMapsMask, Maps.class);
 
         Maps randomMap;
@@ -95,7 +95,7 @@ public class RModeEventHandler extends ListenerAdapter {
 
         selectedModes.retainAll(randomMap.getModes());
         Collections.shuffle(selectedModes, random);
-        Modes randomMode = selectedModes.get(random.nextInt(selectedModes.size()));
+        ModesOld randomMode = selectedModes.get(random.nextInt(selectedModes.size()));
 
         String reRollButtonId = REROLL_BUTTON_ID + SELECTED_MODES_MASK_PREFIX + selectedModesMask + EXCLUDED_MAPS_MASK_PREFIX + excludedMapsMask;
         excludedMaps.add(randomMap);

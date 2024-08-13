@@ -1,6 +1,6 @@
 package ru.allexs82.enums;
 
-public enum Modes {
+public enum ModesOld {
     TURF_TAKEOVER("Turf Takeover"),
     GARDENS_AND_GRAVEYARDS("Gardens & Graveyards"),
     HERBAL_ASSAULT("Herbal Assault"),
@@ -14,7 +14,7 @@ public enum Modes {
 
     private final String name;
 
-    Modes(String name) {
+    ModesOld(String name) {
         this.name = name;
     }
 

@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import ru.allexs82.Utils;
 import ru.allexs82.enums.Characters;
 import ru.allexs82.enums.Maps;
-import ru.allexs82.enums.Modes;
+import ru.allexs82.enums.ModesOld;
 import ru.allexs82.enums.Sides;
 import ru.allexs82.exceptions.MapsException;
 
@@ -87,7 +87,7 @@ public class RGameEventHandler extends ListenerAdapter {
         }
         session.addSelectedModes(event.getValues()
                 .stream()
-                .map(Modes::valueOf)
+                .map(ModesOld::valueOf)
                 .collect(Collectors.toCollection(ArrayList::new)));
         sendResponse(event);
     }
@@ -118,7 +118,7 @@ public class RGameEventHandler extends ListenerAdapter {
 
     private void handleSessionResponse(@NotNull GenericComponentInteractionCreateEvent event, Session session) {
         List<Maps> excludedMaps = session.getExcludedMaps();
-        List<Modes> selectedModes = session.getSelectedModes();
+        List<ModesOld> selectedModes = session.getSelectedModes();
 
         Maps randomMap;
         try {
@@ -142,7 +142,7 @@ public class RGameEventHandler extends ListenerAdapter {
 
         selectedModes.retainAll(randomMap.getModes());
         Collections.shuffle(selectedModes, random);
-        Modes randomMode = selectedModes.get(random.nextInt(selectedModes.size()));
+        ModesOld randomMode = selectedModes.get(random.nextInt(selectedModes.size()));
 
         EmbedBuilder embedBuilder = new EmbedBuilder();
         embedBuilder.setTitle(randomMode.getName() + " on " + randomMap.getName());
@@ -247,8 +247,8 @@ public class RGameEventHandler extends ListenerAdapter {
 
         @NotNull
         @Contract(value = " -> new", pure = true)
-        public List<Modes> getSelectedModes() {
-            return Utils.decodeEnums(selectedModesMask, Modes.class);
+        public List<ModesOld> getSelectedModes() {
+            return Utils.decodeEnums(selectedModesMask, ModesOld.class);
         }
 
         @NotNull
@@ -257,8 +257,8 @@ public class RGameEventHandler extends ListenerAdapter {
             return Utils.decodeEnums(excludedMapsMask, Maps.class);
         }
 
-        public void addSelectedModes(@NotNull List<Modes> modes) {
-            List<Modes> selectedModes = Utils.decodeEnums(selectedModesMask, Modes.class);
+        public void addSelectedModes(@NotNull List<ModesOld> modes) {
+            List<ModesOld> selectedModes = Utils.decodeEnums(selectedModesMask, ModesOld.class);
             selectedModes.addAll(modes);
             selectedModesMask = Utils.encodeEnums(selectedModes);
         }

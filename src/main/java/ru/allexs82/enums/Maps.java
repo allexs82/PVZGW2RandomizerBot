@@ -8,32 +8,32 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public enum Maps {
-    RUSH_THEMEPARK("Seeds of Time", Modes.TURF_TAKEOVER, Modes.GARDENS_AND_GRAVEYARDS),
-    RUSH_SNOW("Grete White North", Modes.TURF_TAKEOVER, Modes.GARDENS_AND_GRAVEYARDS),
-    RUSH_SUBURBIA("Wall Nut Hills", Modes.TURF_TAKEOVER, Modes.GARDENS_AND_GRAVEYARDS),
-    HERB_SPACE("Moon Base Z", Modes.TURF_TAKEOVER, Modes.HERBAL_ASSAULT),
-    HERB_ZOMBURBIA("Zomburbia", Modes.TURF_TAKEOVER, Modes.HERBAL_ASSAULT),
-    HERB_BRAINSTREET("Zombopolis", Modes.TURF_TAKEOVER, Modes.HERBAL_ASSAULT),
-    FE_HUB("Backyard Battleground", Modes.TEAM_VANQUISH, Modes.VANQUISH_CONFIRMED, Modes.CAPTURE_THE_TACO),
-    COOP_ASIA("Zen Peak", Modes.TEAM_VANQUISH, Modes.VANQUISH_CONFIRMED, Modes.SUBURBINATION, Modes.GNOME_BOMB, Modes.CAPTURE_THE_TACO, Modes.SOIL_SURVIVORS),
-    COOP_DINO("Boney Island", Modes.TEAM_VANQUISH, Modes.VANQUISH_CONFIRMED, Modes.SUBURBINATION, Modes.GNOME_BOMB, Modes.CAPTURE_THE_TACO, Modes.SOIL_SURVIVORS),
-    COOP_EGYPT("Sandy Sands", Modes.TEAM_VANQUISH, Modes.VANQUISH_CONFIRMED, Modes.SUBURBINATION, Modes.GNOME_BOMB, Modes.CAPTURE_THE_TACO, Modes.SOIL_SURVIVORS),
-    COOP_ROME("Colizeum", Modes.TEAM_VANQUISH, Modes.VANQUISH_CONFIRMED, Modes.SUBURBINATION, Modes.GNOME_BOMB, Modes.SOIL_SURVIVORS),
-    COOP_TIMEPARK("Time Park", Modes.TEAM_VANQUISH, Modes.VANQUISH_CONFIRMED, Modes.SUBURBINATION, Modes.GNOME_BOMB),
-    COOP_SPACE("Lunar Landing", Modes.TEAM_VANQUISH, Modes.VANQUISH_CONFIRMED, Modes.SUBURBINATION, Modes.GNOME_BOMB, Modes.CAPTURE_THE_TACO, Modes.SOIL_SURVIVORS),
-    COOP_ZOMBOSSFACTORY("Z-Tech Factory", Modes.TEAM_VANQUISH, Modes.VANQUISH_CONFIRMED, Modes.SUBURBINATION, Modes.GNOME_BOMB, Modes.SOIL_SURVIVORS),
-    COOP_SNOW("Frosty Creek", Modes.TEAM_VANQUISH, Modes.VANQUISH_CONFIRMED, Modes.SUBURBINATION, Modes.GNOME_BOMB, Modes.SOIL_SURVIVORS),
-    COOP_MAINSTREET("Aqua Center", Modes.TEAM_VANQUISH, Modes.VANQUISH_CONFIRMED, Modes.SUBURBINATION, Modes.GNOME_BOMB, Modes.SOIL_SURVIVORS),
-    COOP_ZOMBURBIA("Frontline Flats", Modes.TEAM_VANQUISH, Modes.VANQUISH_CONFIRMED, Modes.SUBURBINATION, Modes.GNOME_BOMB, Modes.CAPTURE_THE_TACO, Modes.SOIL_SURVIVORS),
-    COOP_INFINITY_PLANE("Gnomiverse XL", Modes.CATS_VS_DINOS);
+    RUSH_THEMEPARK("Seeds of Time", ModesOld.TURF_TAKEOVER, ModesOld.GARDENS_AND_GRAVEYARDS),
+    RUSH_SNOW("Great White North", ModesOld.TURF_TAKEOVER, ModesOld.GARDENS_AND_GRAVEYARDS),
+    RUSH_SUBURBIA("Wall Nut Hills", ModesOld.TURF_TAKEOVER, ModesOld.GARDENS_AND_GRAVEYARDS),
+    HERB_SPACE("Moon Base Z", ModesOld.TURF_TAKEOVER, ModesOld.HERBAL_ASSAULT),
+    HERB_ZOMBURBIA("Zomburbia", ModesOld.TURF_TAKEOVER, ModesOld.HERBAL_ASSAULT),
+    HERB_BRAINSTREET("Zombopolis", ModesOld.TURF_TAKEOVER, ModesOld.HERBAL_ASSAULT),
+    FE_HUB("Backyard Battleground", ModesOld.TEAM_VANQUISH, ModesOld.VANQUISH_CONFIRMED, ModesOld.CAPTURE_THE_TACO),
+    COOP_ASIA("Zen Peak", ModesOld.TEAM_VANQUISH, ModesOld.VANQUISH_CONFIRMED, ModesOld.SUBURBINATION, ModesOld.GNOME_BOMB, ModesOld.CAPTURE_THE_TACO, ModesOld.SOIL_SURVIVORS),
+    COOP_DINO("Boney Island", ModesOld.TEAM_VANQUISH, ModesOld.VANQUISH_CONFIRMED, ModesOld.SUBURBINATION, ModesOld.GNOME_BOMB, ModesOld.CAPTURE_THE_TACO, ModesOld.SOIL_SURVIVORS),
+    COOP_EGYPT("Sandy Sands", ModesOld.TEAM_VANQUISH, ModesOld.VANQUISH_CONFIRMED, ModesOld.SUBURBINATION, ModesOld.GNOME_BOMB, ModesOld.CAPTURE_THE_TACO, ModesOld.SOIL_SURVIVORS),
+    COOP_ROME("Colizeum", ModesOld.TEAM_VANQUISH, ModesOld.VANQUISH_CONFIRMED, ModesOld.SUBURBINATION, ModesOld.GNOME_BOMB, ModesOld.SOIL_SURVIVORS),
+    COOP_TIMEPARK("Time Park", ModesOld.TEAM_VANQUISH, ModesOld.VANQUISH_CONFIRMED, ModesOld.SUBURBINATION, ModesOld.GNOME_BOMB),
+    COOP_SPACE("Lunar Landing", ModesOld.TEAM_VANQUISH, ModesOld.VANQUISH_CONFIRMED, ModesOld.SUBURBINATION, ModesOld.GNOME_BOMB, ModesOld.CAPTURE_THE_TACO, ModesOld.SOIL_SURVIVORS),
+    COOP_ZOMBOSSFACTORY("Z-Tech Factory", ModesOld.TEAM_VANQUISH, ModesOld.VANQUISH_CONFIRMED, ModesOld.SUBURBINATION, ModesOld.GNOME_BOMB, ModesOld.SOIL_SURVIVORS),
+    COOP_SNOW("Frosty Creek", ModesOld.TEAM_VANQUISH, ModesOld.VANQUISH_CONFIRMED, ModesOld.SUBURBINATION, ModesOld.GNOME_BOMB, ModesOld.SOIL_SURVIVORS),
+    COOP_MAINSTREET("Aqua Center", ModesOld.TEAM_VANQUISH, ModesOld.VANQUISH_CONFIRMED, ModesOld.SUBURBINATION, ModesOld.GNOME_BOMB, ModesOld.SOIL_SURVIVORS),
+    COOP_ZOMBURBIA("Frontline Flats", ModesOld.TEAM_VANQUISH, ModesOld.VANQUISH_CONFIRMED, ModesOld.SUBURBINATION, ModesOld.GNOME_BOMB, ModesOld.CAPTURE_THE_TACO, ModesOld.SOIL_SURVIVORS),
+    COOP_INFINITY_PLANE("Gnomiverse XL", ModesOld.CATS_VS_DINOS);
 
     private final String name;
-    private final EnumSet<Modes> modes;
+    private final EnumSet<ModesOld> modes;
     private static final Random RANDOM = new Random();
 
-    Maps(String name, Modes... modes) {
+    Maps(String name, ModesOld... modes) {
         this.name = name;
-        this.modes = EnumSet.noneOf(Modes.class);
+        this.modes = EnumSet.noneOf(ModesOld.class);
         Collections.addAll(this.modes, modes);
     }
 
@@ -46,10 +46,10 @@ public enum Maps {
      * @throws MapsException if all maps are excluded
      */
     @NotNull
-    public static Maps getRandomMapForModes(@NotNull List<Modes> selectedModes, @Nullable List<Maps> excludedMaps) throws MapsException {
-        if (selectedModes.contains(Modes.TURF_TAKEOVER)) {
-            selectedModes.remove(Modes.GARDENS_AND_GRAVEYARDS);
-            selectedModes.remove(Modes.HERBAL_ASSAULT);
+    public static Maps getRandomMapForModes(@NotNull List<ModesOld> selectedModes, @Nullable List<Maps> excludedMaps) throws MapsException {
+        if (selectedModes.contains(ModesOld.TURF_TAKEOVER)) {
+            selectedModes.remove(ModesOld.GARDENS_AND_GRAVEYARDS);
+            selectedModes.remove(ModesOld.HERBAL_ASSAULT);
         }
 
         List<Maps> matchingMaps = Arrays.stream(Maps.values())
@@ -75,7 +75,7 @@ public enum Maps {
         return name;
     }
 
-    public EnumSet<Modes> getModes() {
+    public EnumSet<ModesOld> getModes() {
         return modes;
     }
 }

@@ -3,7 +3,7 @@ package ru.allexs82;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.allexs82.enums.Maps;
-import ru.allexs82.enums.Modes;
+import ru.allexs82.enums.ModesOld;
 
 import java.util.*;
 
@@ -27,15 +27,15 @@ public class UtilsTest {
 
     @Test
     public void encodeAndDecodeSelectedModes_AllGood() {
-        List<Modes> modes = new ArrayList<>();
-        for (Modes mode : Modes.values()) {
+        List<ModesOld> modes = new ArrayList<>();
+        for (ModesOld mode : ModesOld.values()) {
             if (random.nextBoolean()) {
                 modes.add(mode);
             }
         }
 
         int mask = Utils.encodeEnums(modes);
-        List<Modes> decodedModes = Utils.decodeEnums(mask, Modes.class);
+        List<ModesOld> decodedModes = Utils.decodeEnums(mask, ModesOld.class);
 
         Assertions.assertIterableEquals(modes, decodedModes);
     }

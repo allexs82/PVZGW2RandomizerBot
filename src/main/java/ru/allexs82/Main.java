@@ -2,12 +2,12 @@ package ru.allexs82;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.exceptions.InvalidTokenException;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.jetbrains.annotations.NotNull;
-import ru.allexs82.event_handlers.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.allexs82.event_handlers.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
