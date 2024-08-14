@@ -1,4 +1,4 @@
-package ru.allexs82.deperecated;
+package ru.allexs82.deprecated;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -7,7 +7,7 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.allexs82.deperecated.event_handlers.*;
+import ru.allexs82.deprecated.event_handlers.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;

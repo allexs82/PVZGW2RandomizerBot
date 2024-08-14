@@ -1,4 +1,4 @@
-package ru.allexs82.deperecated.enums;
+package ru.allexs82.deprecated.enums;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

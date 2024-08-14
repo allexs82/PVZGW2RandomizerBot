@@ -1,9 +1,9 @@
-package ru.allexs82.deperecated;
+package ru.allexs82.deprecated;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.allexs82.deperecated.enums.Maps;
-import ru.allexs82.deperecated.enums.ModesOld;
+import ru.allexs82.deprecated.enums.Maps;
+import ru.allexs82.deprecated.enums.ModesOld;
 
 import java.util.*;
 

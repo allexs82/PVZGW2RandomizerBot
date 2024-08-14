@@ -1,4 +1,4 @@
-package ru.allexs82.deperecated.enums;
+package ru.allexs82.deprecated.enums;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package ru.allexs82.deperecated.event_handlers;
+package ru.allexs82.deprecated.event_handlers;
 
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -9,9 +9,9 @@ import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.allexs82.deperecated.Utils;
-import ru.allexs82.deperecated.enums.CharPacks;
-import ru.allexs82.deperecated.enums.Characters;
+import ru.allexs82.deprecated.Utils;
+import ru.allexs82.deprecated.enums.CharPacks;
+import ru.allexs82.deprecated.enums.Characters;
 
 import java.util.*;
 

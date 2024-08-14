@@ -1,4 +1,4 @@
-package ru.allexs82.deperecated.enums;
+package ru.allexs82.deprecated.enums;
 
 @Deprecated
 public enum ModesOld {

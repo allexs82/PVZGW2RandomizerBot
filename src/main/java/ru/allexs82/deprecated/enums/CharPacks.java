@@ -1,4 +1,4 @@
-package ru.allexs82.deperecated.enums;
+package ru.allexs82.deprecated.enums;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;

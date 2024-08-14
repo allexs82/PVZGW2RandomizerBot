@@ -1,6 +1,6 @@
-package ru.allexs82.deperecated;
+package ru.allexs82.deprecated;
 
-import ru.allexs82.deperecated.enums.ModesOld;
+import ru.allexs82.deprecated.enums.ModesOld;
 import net.dv8tion.jda.api.events.interaction.GenericInteractionCreateEvent;
 import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu;
 import org.jetbrains.annotations.NotNull;

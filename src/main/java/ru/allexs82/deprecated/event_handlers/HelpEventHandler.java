@@ -1,4 +1,4 @@
-package ru.allexs82.deperecated.event_handlers;
+package ru.allexs82.deprecated.event_handlers;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
