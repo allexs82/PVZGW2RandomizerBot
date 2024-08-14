@@ -5,13 +5,13 @@ import net.dv8tion.jda.api.entities.MessageEmbed
 
 private const val embedColor = 0xffaec9
 
-sealed class CharacterPacks(open val characters: List<ru.allexs82.data.Character>) {
-    data class CharacterPack(override val characters: List<ru.allexs82.data.Character>) : CharacterPacks(characters)
+sealed class CharacterPacks(open val characters: List<Character>) {
+    data class CharacterPack(override val characters: List<Character>) : CharacterPacks(characters)
 
     fun toEmbed(): MessageEmbed {
         val embedBuilder = EmbedBuilder()
         embedBuilder.setColor(embedColor)
-        for (character: ru.allexs82.data.Character in characters) {
+        for (character: Character in characters) {
             embedBuilder.appendDescription(character.characterName + "\n")
         }
         return embedBuilder.build()
@@ -20,310 +20,310 @@ sealed class CharacterPacks(open val characters: List<ru.allexs82.data.Character
     companion object {
         val FIRST = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.FIRE_FLOWER,
-                ru.allexs82.data.Character.YETI_CHOMPER,
-                ru.allexs82.data.Character.CAPTAIN_SQUAWK,
-                ru.allexs82.data.Character.CAPTAIN_SHARKBITE
+                Character.FIRE_FLOWER,
+                Character.YETI_CHOMPER,
+                Character.CAPTAIN_SQUAWK,
+                Character.CAPTAIN_SHARKBITE
             )
         )
         val SECOND = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.TOXIC_PEA,
-                ru.allexs82.data.Character.TOXIC_CITRON,
-                ru.allexs82.data.Character.SHRIMP,
-                ru.allexs82.data.Character.COZMIC_BRAINZ
+                Character.TOXIC_PEA,
+                Character.TOXIC_CITRON,
+                Character.SHRIMP,
+                Character.COZMIC_BRAINZ
             )
         )
         val THIRD = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.FIRE_PEA,
-                ru.allexs82.data.Character.FIRE_CHOMPER,
-                ru.allexs82.data.Character.LIL_DRAKE,
-                ru.allexs82.data.Character.CAPTAIN_CANNON
+                Character.FIRE_PEA,
+                Character.FIRE_CHOMPER,
+                Character.LIL_DRAKE,
+                Character.CAPTAIN_CANNON
             )
         )
         val FOURTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.CORN,
-                ru.allexs82.data.Character.PETRIFIED_CACTUS,
-                ru.allexs82.data.Character.SUPER_COMMANDO,
-                ru.allexs82.data.Character.BREAKFAST_BRAINZ
+                Character.CORN,
+                Character.PETRIFIED_CACTUS,
+                Character.SUPER_COMMANDO,
+                Character.BREAKFAST_BRAINZ
             )
         )
         val FIFTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.ALIEN_FLOWER,
-                ru.allexs82.data.Character.CITRON,
-                ru.allexs82.data.Character.CAPTAIN_FLAMEFACE,
-                ru.allexs82.data.Character.SUPER_COMMANDO
+                Character.ALIEN_FLOWER,
+                Character.CITRON,
+                Character.CAPTAIN_FLAMEFACE,
+                Character.SUPER_COMMANDO
             )
         )
         val SIXTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.PEASHOOTER,
-                ru.allexs82.data.Character.COMMANDO_PEA,
-                ru.allexs82.data.Character.MARINE_BIOLOGIST,
-                ru.allexs82.data.Character.ARCHEOLOGIST
+                Character.PEASHOOTER,
+                Character.COMMANDO_PEA,
+                Character.MARINE_BIOLOGIST,
+                Character.ARCHEOLOGIST
             )
         )
         val SEVENTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.CAMO_CACTUS,
-                ru.allexs82.data.Character.FROST_ROSE,
-                ru.allexs82.data.Character.CAPTAIN_PARTYMAN,
-                ru.allexs82.data.Character.ELECTRO_BRAINZ
+                Character.CAMO_CACTUS,
+                Character.FROST_ROSE,
+                Character.CAPTAIN_PARTYMAN,
+                Character.ELECTRO_BRAINZ
             )
         )
         val EIGHT = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.AGENT_PEA,
-                ru.allexs82.data.Character.CHOMP_THING,
-                ru.allexs82.data.Character.ASTRONAUT,
-                ru.allexs82.data.Character.ARCHEOLOGIST
+                Character.AGENT_PEA,
+                Character.CHOMP_THING,
+                Character.ASTRONAUT,
+                Character.ARCHEOLOGIST
             )
         )
         val NINTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.POWER_FLOWER,
-                ru.allexs82.data.Character.ELECTRO_PEA,
-                ru.allexs82.data.Character.SCUBA_SOLDIER,
-                ru.allexs82.data.Character.ROADIE_Z
+                Character.POWER_FLOWER,
+                Character.ELECTRO_PEA,
+                Character.SCUBA_SOLDIER,
+                Character.ROADIE_Z
             )
         )
         val TENTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.DRUID_ROSE,
-                ru.allexs82.data.Character.TOXIC_CHOMPER,
-                ru.allexs82.data.Character.IMP,
-                ru.allexs82.data.Character.PLUMBER
+                Character.DRUID_ROSE,
+                Character.TOXIC_CHOMPER,
+                Character.IMP,
+                Character.PLUMBER
             )
         )
         val ELEVENTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.BBQ_CORN,
-                ru.allexs82.data.Character.FROZEN_CITRON,
-                ru.allexs82.data.Character.HOCKEY_STAR,
-                ru.allexs82.data.Character.PYLON_IMP
+                Character.BBQ_CORN,
+                Character.FROZEN_CITRON,
+                Character.HOCKEY_STAR,
+                Character.PYLON_IMP
             )
         )
         val TWELFTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.FUTURE_CACTUS,
-                ru.allexs82.data.Character.FIRE_ROSE,
-                ru.allexs82.data.Character.DR_TOXIC,
-                ru.allexs82.data.Character.WRESTLING_STAR
+                Character.FUTURE_CACTUS,
+                Character.FIRE_ROSE,
+                Character.DR_TOXIC,
+                Character.WRESTLING_STAR
             )
         )
         val THIRTEENTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.CACTUS,
-                ru.allexs82.data.Character.ROCK_PEA,
-                ru.allexs82.data.Character.ALL_STAR,
-                ru.allexs82.data.Character.SKY_TROOPER
+                Character.CACTUS,
+                Character.ROCK_PEA,
+                Character.ALL_STAR,
+                Character.SKY_TROOPER
             )
         )
         val FOURTEENTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.PARTY_CORN,
-                ru.allexs82.data.Character.PARTY_ROSE,
-                ru.allexs82.data.Character.COMPUTER_SCIENTIST,
-                ru.allexs82.data.Character.PARTY_BRAINZ
+                Character.PARTY_CORN,
+                Character.PARTY_ROSE,
+                Character.COMPUTER_SCIENTIST,
+                Character.PARTY_BRAINZ
             )
         )
         val FIFTEENTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.ZEN_CACTUS,
-                ru.allexs82.data.Character.PARTY_CITRON,
-                ru.allexs82.data.Character.PARK_RANGER,
-                ru.allexs82.data.Character.AC_PERRY
+                Character.ZEN_CACTUS,
+                Character.PARTY_CITRON,
+                Character.PARK_RANGER,
+                Character.AC_PERRY
             )
         )
         val SIXTEENTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.PLASMA_PEA,
-                ru.allexs82.data.Character.ELECTRO_CITRON,
-                ru.allexs82.data.Character.SOLDIER,
-                ru.allexs82.data.Character.GOLF_STAR
+                Character.PLASMA_PEA,
+                Character.ELECTRO_CITRON,
+                Character.SOLDIER,
+                Character.GOLF_STAR
             )
         )
         val SEVENTEENTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.COMMANDO_CORN,
-                ru.allexs82.data.Character.CHOMPER,
-                ru.allexs82.data.Character.ARCTIC_TROOPER,
-                ru.allexs82.data.Character.PALEONTOLOGIST
+                Character.COMMANDO_CORN,
+                Character.CHOMPER,
+                Character.ARCTIC_TROOPER,
+                Character.PALEONTOLOGIST
             )
         )
         val EIGHTEENTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.LAW_PEA,
-                ru.allexs82.data.Character.JADE_CACTUS,
-                ru.allexs82.data.Character.GOALIE_STAR,
-                ru.allexs82.data.Character.MECHANIC
+                Character.LAW_PEA,
+                Character.JADE_CACTUS,
+                Character.GOALIE_STAR,
+                Character.MECHANIC
             )
         )
         val NINETEENTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.VAMPIRE_FLOWER,
-                ru.allexs82.data.Character.IRON_CITRON,
-                ru.allexs82.data.Character.PAINTER,
-                ru.allexs82.data.Character.ZOOLOGIST
+                Character.VAMPIRE_FLOWER,
+                Character.IRON_CITRON,
+                Character.PAINTER,
+                Character.ZOOLOGIST
             )
         )
         val TWENTIETH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.STUFFY_FLOWER,
-                ru.allexs82.data.Character.ROSE,
-                ru.allexs82.data.Character.LANDSCAPER,
-                ru.allexs82.data.Character.RUGBY_STAR
+                Character.STUFFY_FLOWER,
+                Character.ROSE,
+                Character.LANDSCAPER,
+                Character.RUGBY_STAR
             )
         )
         val TWENTY_FIRST = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.SUNFLOWER,
-                ru.allexs82.data.Character.POPS_CORN,
-                ru.allexs82.data.Character.CHEMIST,
-                ru.allexs82.data.Character.TANK_COMMANDER
+                Character.SUNFLOWER,
+                Character.POPS_CORN,
+                Character.CHEMIST,
+                Character.TANK_COMMANDER
             )
         )
         val TWENTY_SECOND = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.POWER_CACTUS,
-                ru.allexs82.data.Character.POWER_CHOMPER,
-                ru.allexs82.data.Character.WELDER,
-                ru.allexs82.data.Character.HOVER_GOAT
+                Character.POWER_CACTUS,
+                Character.POWER_CHOMPER,
+                Character.WELDER,
+                Character.HOVER_GOAT
             )
         )
         val TWENTY_THIRD = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.MOB_COB,
-                ru.allexs82.data.Character.BANDIT_CACTUS,
-                ru.allexs82.data.Character.CAMO_RANGER,
-                ru.allexs82.data.Character.ELECTRICIAN
+                Character.MOB_COB,
+                Character.BANDIT_CACTUS,
+                Character.CAMO_RANGER,
+                Character.ELECTRICIAN
             )
         )
         val TWENTY_FOURTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.MOB_COB,
-                ru.allexs82.data.Character.BANDIT_CACTUS,
-                ru.allexs82.data.Character.CAMO_RANGER,
-                ru.allexs82.data.Character.ELECTRICIAN
+                Character.MOB_COB,
+                Character.BANDIT_CACTUS,
+                Character.CAMO_RANGER,
+                Character.ELECTRICIAN
             )
         )
         val TWENTY_FIFTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.FIRE_CACTUS,
-                ru.allexs82.data.Character.NEC_ROSE,
-                ru.allexs82.data.Character.SUPER_BRAINZ,
-                ru.allexs82.data.Character.TENNIS_STAR
+                Character.FIRE_CACTUS,
+                Character.NEC_ROSE,
+                Character.SUPER_BRAINZ,
+                Character.TENNIS_STAR
             )
         )
         val TWENTY_SIXTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.COUNT_CHOMPULA,
-                ru.allexs82.data.Character.ICE_PEA,
-                ru.allexs82.data.Character.CENTURION,
-                ru.allexs82.data.Character.SCIENTIST
+                Character.COUNT_CHOMPULA,
+                Character.ICE_PEA,
+                Character.CENTURION,
+                Character.SCIENTIST
             )
         )
         val TWENTY_SEVENTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.DISCO_CHOMPER,
-                ru.allexs82.data.Character.ICE_CACTUS,
-                ru.allexs82.data.Character.CAPTAIN,
-                ru.allexs82.data.Character.PARTY_IMP
+                Character.DISCO_CHOMPER,
+                Character.ICE_CACTUS,
+                Character.CAPTAIN,
+                Character.PARTY_IMP
             )
         )
         val TWENTY_EIGHTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.TORCHWOOD,
-                ru.allexs82.data.Character.ARMOR_CHOMPER,
-                ru.allexs82.data.Character.Z7_IMP,
-                ru.allexs82.data.Character.MOTO_X_STAR
+                Character.TORCHWOOD,
+                Character.ARMOR_CHOMPER,
+                Character.Z7_IMP,
+                Character.MOTO_X_STAR
             )
         )
         val TWENTY_NINTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.SHADOW_FLOWER,
-                ru.allexs82.data.Character.HOT_ROD_CHOMPER,
-                ru.allexs82.data.Character.TOXIC_BRAINZ,
-                ru.allexs82.data.Character.ENGINEER
+                Character.SHADOW_FLOWER,
+                Character.HOT_ROD_CHOMPER,
+                Character.TOXIC_BRAINZ,
+                Character.ENGINEER
             )
         )
         val THIRTIETH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.METAL_PETAL,
-                ru.allexs82.data.Character.SUN_PHARAOH,
-                ru.allexs82.data.Character.CRICKET_STAR,
-                ru.allexs82.data.Character.PHYSICIST
+                Character.METAL_PETAL,
+                Character.SUN_PHARAOH,
+                Character.CRICKET_STAR,
+                Character.PHYSICIST
             )
         )
         val THIRTY_FIRST = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.MYSTIC_FLOWER,
-                ru.allexs82.data.Character.SCALLYWAG_IMP,
-                ru.allexs82.data.Character.SANITATION_EXPERT
+                Character.MYSTIC_FLOWER,
+                Character.SCALLYWAG_IMP,
+                Character.SANITATION_EXPERT
             )
         )
 
         val THIRTY_SECOND = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.CAMO_CACTUS,
-                ru.allexs82.data.Character.PETRIFIED_CACTUS,
-                ru.allexs82.data.Character.ELECTRO_PEA,
-                ru.allexs82.data.Character.CAMO_RANGER,
-                ru.allexs82.data.Character.CAPTAIN_CANNON,
-                ru.allexs82.data.Character.CAPTAIN_SQUAWK
+                Character.CAMO_CACTUS,
+                Character.PETRIFIED_CACTUS,
+                Character.ELECTRO_PEA,
+                Character.CAMO_RANGER,
+                Character.CAPTAIN_CANNON,
+                Character.CAPTAIN_SQUAWK
             )
         )
         val THIRTY_THIRD = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.AGENT_PEA,
-                ru.allexs82.data.Character.TOXIC_CITRON,
-                ru.allexs82.data.Character.ARMOR_CHOMPER,
-                ru.allexs82.data.Character.FROST_ROSE,
-                ru.allexs82.data.Character.TOXIC_BRAINZ,
-                ru.allexs82.data.Character.PARTY_BRAINZ,
-                ru.allexs82.data.Character.ELECTRO_BRAINZ,
-                ru.allexs82.data.Character.COZMIC_BRAINZ
+                Character.AGENT_PEA,
+                Character.TOXIC_CITRON,
+                Character.ARMOR_CHOMPER,
+                Character.FROST_ROSE,
+                Character.TOXIC_BRAINZ,
+                Character.PARTY_BRAINZ,
+                Character.ELECTRO_BRAINZ,
+                Character.COZMIC_BRAINZ
             )
         )
         val THIRTY_FOURTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.TORCHWOOD,
-                ru.allexs82.data.Character.YETI_CHOMPER,
-                ru.allexs82.data.Character.FIRE_ROSE,
-                ru.allexs82.data.Character.CHOMP_THING,
-                ru.allexs82.data.Character.ALL_STAR,
-                ru.allexs82.data.Character.ZOOLOGIST,
-                ru.allexs82.data.Character.ROADIE_Z,
-                ru.allexs82.data.Character.BREAKFAST_BRAINZ
+                Character.TORCHWOOD,
+                Character.YETI_CHOMPER,
+                Character.FIRE_ROSE,
+                Character.CHOMP_THING,
+                Character.ALL_STAR,
+                Character.ZOOLOGIST,
+                Character.ROADIE_Z,
+                Character.BREAKFAST_BRAINZ
             )
         )
         val THIRTY_FIFTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.SOLDIER,
-                ru.allexs82.data.Character.PAINTER,
-                ru.allexs82.data.Character.ARCHEOLOGIST,
-                ru.allexs82.data.Character.ROADIE_Z,
-                ru.allexs82.data.Character.FUTURE_CACTUS,
-                ru.allexs82.data.Character.PLASMA_PEA,
-                ru.allexs82.data.Character.CHOMP_THING,
-                ru.allexs82.data.Character.ELECTRO_CITRON
+                Character.SOLDIER,
+                Character.PAINTER,
+                Character.ARCHEOLOGIST,
+                Character.ROADIE_Z,
+                Character.FUTURE_CACTUS,
+                Character.PLASMA_PEA,
+                Character.CHOMP_THING,
+                Character.ELECTRO_CITRON
             )
         )
         val THIRTY_SIXTH = CharacterPack(
             listOf(
-                ru.allexs82.data.Character.AGENT_PEA,
-                ru.allexs82.data.Character.TORCHWOOD,
-                ru.allexs82.data.Character.POWER_CHOMPER,
-                ru.allexs82.data.Character.TOXIC_CHOMPER,
-                ru.allexs82.data.Character.FIRE_CHOMPER,
-                ru.allexs82.data.Character.HOCKEY_STAR,
-                ru.allexs82.data.Character.SUPER_COMMANDO,
-                ru.allexs82.data.Character.COZMIC_BRAINZ,
-                ru.allexs82.data.Character.ELECTRO_BRAINZ,
-                ru.allexs82.data.Character.BREAKFAST_BRAINZ
+                Character.AGENT_PEA,
+                Character.TORCHWOOD,
+                Character.POWER_CHOMPER,
+                Character.TOXIC_CHOMPER,
+                Character.FIRE_CHOMPER,
+                Character.HOCKEY_STAR,
+                Character.SUPER_COMMANDO,
+                Character.COZMIC_BRAINZ,
+                Character.ELECTRO_BRAINZ,
+                Character.BREAKFAST_BRAINZ
             )
         )
 
