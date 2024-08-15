@@ -97,8 +97,7 @@ class RGameEventListener : ListenerAdapter() {
     }
 
     private fun sendResponse(event: GenericComponentInteractionCreateEvent) {
-        val userId = event.user.id
-        val session = sessionsHashMap[userId]
+        val session = sessionsHashMap[event.user.id]
         if (session == null) {
             event.hook.deleteOriginal().submit().thenCompose {
                 event.hook.editOriginal("Session not found. Please type /rgame again.").submit()
@@ -219,26 +218,17 @@ class RGameEventListener : ListenerAdapter() {
             }
         }
 
-        private class Session(private var host: User?, players: MutableList<User>) {
-            private val players: MutableList<User> = mutableListOf()
+        private class Session(private var host: User?, private val players: List<User>) {
             private var selectedModesMask = 0
             private var excludedMapsMask = 0
             private var lastMap: GameMap? = null
-
-            init {
-                players.removeIf { obj: User? ->
-                    Objects.isNull(
-                        obj
-                    )
-                }
-            }
 
             fun getHost(): User? {
                 return host
             }
 
             fun getPlayers(): List<User> {
-                return players.toList()
+                return players
             }
 
             fun getSelectedModes(): List<Modes> {

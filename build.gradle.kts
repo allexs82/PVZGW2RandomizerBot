@@ -1,6 +1,9 @@
+import groovy.util.Node
+
 plugins {
     java
     id("org.jetbrains.kotlin.jvm") version "1.9.10"
+    `maven-publish`
 }
 
 group = "ru.allexs82"
@@ -19,6 +22,25 @@ dependencies {
         exclude(module = "opus-java")
     }
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+}
+
+java {
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+
+            groupId = "ru.allexs82"
+            artifactId = "PVZGW2RandomizerBot"
+            version = "1.0.0"
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
 }
 
 tasks.jar {

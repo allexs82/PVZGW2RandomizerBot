@@ -39,6 +39,8 @@ object JDAManager {
         token = newToken
     }
 
+    fun isJdaValid(): Boolean = jda != null
+
     private fun setupJDA(token: String): JDA {
         val jdaBuilder = JDABuilder.createDefault(token)
             .enableIntents(GatewayIntent.MESSAGE_CONTENT)
