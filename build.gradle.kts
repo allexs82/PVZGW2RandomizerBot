@@ -1,5 +1,3 @@
-import groovy.util.Node
-
 plugins {
     java
     id("org.jetbrains.kotlin.jvm") version "1.9.10"
