@@ -18,7 +18,7 @@ class HelpEventListener : ListenerAdapter() {
                 
                 `/rmode` - Rolls a random map depending on selected modes.
                 
-                `/rchar <side: Enum>` - Rolls a random character depending on selected side.
+                `/rchar [side: Enum]` - Rolls a random character depending on selected side.
                 
                 `/rgame [p2: User] [p3: User] [p4: User]` - /rchar and /rmode combined.
                 
