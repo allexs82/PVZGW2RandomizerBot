@@ -1,4 +1,4 @@
-# Plants vs. Zombies Garden Warfare 2 randomiser discord bot
+# Plants vs. Zombies Garden Warfare 2 randomizer discord bot
 
 A feature-rich Discord bot built using Kotlin and the [JDA](https://github.com/discord-jda/JDA) library. This bot is designed to be modular, easy to extend, and packed with useful commands.
 
@@ -13,8 +13,8 @@ Before running the bot, ensure you have the following installed:
 
 1. **Clone the repository**:
 2. **Configure the bot**:
-   - Setup env var called PVZGW2RandomizerBotToken with your token or put token.txt.
-   - Token can be obtained on the [Discord Developer Portal](https://discord.com/developers).
+   - Setup env var called `PVZGW2RandomizerBotToken` with your token or put `token.txt`.
+   - Token can be obtained on the [Discord Developer Portal](https://discord.com/developers). You need bot with `applications.commands` scope.
 3. **Build and run the bot**:
    - Using Gradle:
      ```bash
@@ -24,7 +24,7 @@ Before running the bot, ensure you have the following installed:
 
 ## Commands
 
-Here are some of the commands available:
+Here are the commands available:
 
 | Command             | Description                                    | Example           |
 |---------------------|------------------------------------------------|-------------------|

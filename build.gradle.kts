@@ -1,11 +1,11 @@
 plugins {
     java
-    id("org.jetbrains.kotlin.jvm") version "1.9.10"
+    id("org.jetbrains.kotlin.jvm") version "2.1.10"
     `maven-publish`
 }
 
 group = "ru.allexs82"
-version = "2.1"
+version = "2.2"
 
 repositories {
     mavenCentral()
@@ -16,7 +16,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.mockito:mockito-core:3.9.0")
     implementation("ch.qos.logback:logback-classic:1.3.14")
-    implementation("net.dv8tion:JDA:5.0.0-beta.24") {
+    implementation("net.dv8tion:JDA:5.3.0") {
         exclude(module = "opus-java")
     }
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -24,21 +24,6 @@ dependencies {
 
 java {
     withSourcesJar()
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
-
-            groupId = "ru.allexs82"
-            artifactId = "PVZGW2RandomizerBot"
-            version = "1.0.1"
-        }
-    }
-    repositories {
-        mavenLocal()
-    }
 }
 
 tasks.jar {
@@ -52,10 +37,4 @@ tasks.jar {
 
 tasks.test {
     useJUnitPlatform()
-}
-
-kotlin {
-    jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(8))
-    }
 }
