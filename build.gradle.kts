@@ -1,7 +1,7 @@
 plugins {
     java
-    id("org.jetbrains.kotlin.jvm") version "2.1.10"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    kotlin("jvm") version "2.1.21"
+    id("com.gradleup.shadow") version "8.3.6"
     `maven-publish`
 }
 
@@ -17,14 +17,18 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.mockito:mockito-core:3.9.0")
     implementation("ch.qos.logback:logback-classic:1.5.13")
-    implementation("net.dv8tion:JDA:5.3.0") {
+    implementation("net.dv8tion:JDA:5.5.1") {
         exclude(module = "opus-java")
+        exclude(module="tink")
     }
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
 }
 
 java {
     withSourcesJar()
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 
 tasks.jar {
@@ -37,17 +41,19 @@ tasks.jar {
 }
 
 tasks.shadowJar{
-    archiveFileName.set("${rootProject.name}-all.jar")
+    archiveBaseName.set(rootProject.name)
+    archiveVersion.set("")
 
     manifest {
         attributes["Main-Class"] = "ru.allexs82.MainKt"
     }
 
+    mergeServiceFiles()
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    minimize {
-        exclude(dependency("net.dv8tion:JDA:.*"))
-    }
+}
 
+tasks.build {
+    dependsOn(tasks.shadowJar)
 }
 
 tasks.test {
