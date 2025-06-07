@@ -72,7 +72,7 @@ class RGameEventListener : ListenerAdapter() {
             event.hook.editOriginal("Oops... Couldn't find your session :confused:. Make sure it was you who sent /rgame.")
                 .submit()
                 .whenComplete { _: Message?, _: Throwable? ->
-                    LOGGER.error("Can't find session for user {}", DiscordUtils.getUserNameAndId(event))
+                    LOGGER.warn("Can't find session for user {}", DiscordUtils.getUserNameAndId(event))
                 }
             return
         }
@@ -127,7 +127,7 @@ class RGameEventListener : ListenerAdapter() {
 
         val playersList = mutableListOf<User>()
         session.getHost()?.let { playersList.add(it) }
-        playersList.addAll(session.getPlayers())
+        playersList.addAll(session.getPlayers().shuffled())
 
         val randomCharacters = assignCharactersToPlayers(playersList)
 
