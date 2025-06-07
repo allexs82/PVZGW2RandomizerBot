@@ -5,6 +5,7 @@ WORKDIR /app
 COPY . .
 
 # Build the application
+RUN chmod +x ./gradlew
 RUN ./gradlew shadowJar
 
 # Runtime stage
