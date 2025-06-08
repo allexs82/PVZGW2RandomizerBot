@@ -20,3 +20,4 @@ RUN useradd -m appuser && chown -R appuser /app
 USER appuser
 
 ENTRYPOINT ["java", "-jar", "app.jar", "-env=render"]
+EXPOSE 8080
