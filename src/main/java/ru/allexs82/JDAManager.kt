@@ -8,12 +8,23 @@ import net.dv8tion.jda.api.requests.GatewayIntent
 import org.slf4j.LoggerFactory
 import ru.allexs82.listeners.*
 import java.io.File
-import java.util.*
+import java.net.URI
+import java.net.http.HttpClient
+import java.net.http.HttpRequest
+import java.net.http.HttpResponse
+import java.time.Duration
 import kotlin.system.exitProcess
 
+
+private const val TOKEN_FILE = "token.txt"
+private const val TOKEN_ENV_VAR = "PVZGW2RandomizerBotToken"
+
 private val logger = LoggerFactory.getLogger(JDAManager::class.java)
+private val discordTokenCheckUri = URI.create("https://discord.com/api/v10/users/@me")
 
 object JDAManager {
+    val httpClient: HttpClient = HttpClient.newBuilder().build()
+    
     var exitOnShutdown = true
     private val listeners: List<ListenerAdapter> = listOf(
         LogEventListener(),
@@ -28,7 +39,7 @@ object JDAManager {
 
     @Synchronized
     fun getJdaInstance(): JDA {
-        if (jda == null) {
+        if (!isJdaValid()) {
             jda = setupJDA(tryFindToken())
         }
         return jda!!
@@ -58,16 +69,31 @@ object JDAManager {
     }
 
     private fun tryFindToken(): String {
-        if (token != null) return token!!
+        token?.let { if (checkToken(it)) return it }
 
-        val tokenFile = File("token.txt")
-        if (tokenFile.exists()) {
-            val scanner = Scanner(tokenFile)
-            val result = scanner.nextLine()
-            scanner.close()
-            return result
+        File(TOKEN_FILE).takeIf { it.exists() && it.length() > 0 }?.let { file ->
+            file.useLines { lines ->
+                lines.firstOrNull()?.takeIf { checkToken(it) }?.let { return it }
+            }
         }
 
-        return System.getenv("PVZGW2RandomizerBotToken")
+        System.getenv(TOKEN_ENV_VAR)?.takeIf { checkToken(it) }?.let { return it }
+
+        throw IllegalArgumentException("""
+            No valid token found. Please set token via:
+            1. "-token=" cmd argument (example: "java -jar PVZGW2RandomizerBot.jar -token=Yu45foi!sdsx7duIUSD15")
+            2. $TOKEN_FILE file
+            3. $TOKEN_ENV_VAR environment variable
+        """.trimIndent())
+    }
+
+    private fun checkToken(token: String): Boolean {
+        val request = HttpRequest.newBuilder(discordTokenCheckUri)
+            .timeout(Duration.ofSeconds(20))
+            .header("Authorization", "Bot $token")
+            .build()
+
+        val response = httpClient.send(request, HttpResponse.BodyHandlers.ofString(Charsets.UTF_8))
+        return response.statusCode() == 200
     }
 }

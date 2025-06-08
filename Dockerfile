@@ -19,4 +19,4 @@ COPY --from=builder /app/build/libs/*-all.jar app.jar
 RUN useradd -m appuser && chown -R appuser /app
 USER appuser
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar", "-env=render"]

@@ -51,16 +51,8 @@ class RGameEventListener : ListenerAdapter() {
         }
     }
 
-    private fun getPlayersFromEvent(event: SlashCommandInteractionEvent): MutableList<User> {
-        val players = mutableListOf<User>()
-        for (i in 2..4) {
-            val user = event.getOption("p$i")?.asUser
-            if (user != null) {
-                players.add(user)
-            }
-        }
-        return players
-    }
+    private fun getPlayersFromEvent(event: SlashCommandInteractionEvent): List<User> =
+        (2..4).mapNotNull { i -> event.getOption("p$i")?.asUser }
 
     override fun onStringSelectInteraction(event: StringSelectInteractionEvent) {
         if (event.componentId != STRING_SELECT_MENU_ID) return
