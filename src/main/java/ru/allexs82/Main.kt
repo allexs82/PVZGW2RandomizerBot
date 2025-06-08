@@ -1,6 +1,7 @@
 package ru.allexs82
 
 import org.slf4j.LoggerFactory
+import ru.allexs82.render.RenderWebService
 import ru.allexs82.utils.CommandSetupUtil
 
 fun main(args: Array<String>) {
@@ -15,6 +16,7 @@ fun main(args: Array<String>) {
     val logger = LoggerFactory.getLogger("Main")
 
     if (env == "render") {
+        RenderWebService.start()
         return
     }
 
